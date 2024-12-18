@@ -1,0 +1,47 @@
+<div>
+  <h1>Simulation de rémunération</h1>
+  <form (ngSubmit)="onSubmit()">
+    <label for="typeWork">Type de travail</label>
+    <select [(ngModel)]="typeWork" id="typeWork" name="typeWork">
+      <option value="salarié">Salarié</option>
+      <option value="auto">Auto-entrepreneur</option>
+    </select>
+
+    <div *ngIf="typeWork === 'salarié'">
+      <div>
+        <label for="salaire">Salaire brut</label>
+        <input
+          type="number"
+          [(ngModel)]="salaireBrut"
+          id="salaire"
+          name="salaire"
+          placeholder="Entrez le salaire brut"
+        />
+      </div>
+
+      <div>
+        <label for="unite">Unité</label>
+        <select [(ngModel)]="salaireUnite" id="unite" name="unite">
+          <option value="€/mois">/ mois</option>
+          <option value="€/an">/ an</option>
+        </select>
+      </div>
+
+      <div>
+        <label for="contrat">Type de contrat</label>
+        <select [(ngModel)]="contratType" id="contrat" name="contrat">
+          <option value="CDI">CDI</option>
+          <option value="CDD">CDD</option>
+        </select>
+      </div>
+    </div>
+
+    <button type="submit">Simuler</button>
+  </form>
+
+  <!-- Résultat de la simulation -->
+  <div *ngIf="result">
+    <h2>Résultats :</h2>
+    <pre>{{ result | json }}</pre>
+  </div>
+</div>
