@@ -8,7 +8,6 @@ export class EntrepriseService {
   private backendUrl = 'http://localhost:3000/api/simulator'; 
 
   async getSimulatorData(simulatorData: any): Promise<any> {
-    console.log(simulatorData)
     try {
       const response = await axios.post(this.backendUrl, simulatorData);
       return response.data;

@@ -2,7 +2,7 @@
   <h1>Simulation de rémunération</h1>
   <form (ngSubmit)="onSubmit()">
     <label for="typeWork">Type de travail</label>
-    <select [(ngModel)]="typeWork" id="typeWork" name="typeWork">
+    <select [(ngModel)]="typeWork" (change)="result = null" id="typeWork" name="typeWork">
       <option value="salarié">Salarié</option>
       <option value="auto">Auto-entrepreneur</option>
     </select>
@@ -36,12 +36,85 @@
       </div>
     </div>
 
+    <div *ngIf="typeWork === 'auto'">
+      <div>
+        <label for="ca">Chiffre d'affaires</label>
+        <input
+          type="number"
+          [(ngModel)]="ca"
+          id="ca"
+          name="ca"
+          placeholder="Entrez le chiffre d'affaires"
+        />
+      </div>
+
+      <div>
+        <label for="nature">Type de nature</label>
+        <select [(ngModel)]="nature" id="nature" name="nature">
+          <option value="libérale">libérale</option>
+        </select>
+      </div>
+
+      <div *ngIf="nature === 'libérale'">
+        <label for="reglementee">réglementé</label>
+        <select [(ngModel)]="reglementee" id="reglementee" name="reglementee">
+          <option value="oui">oui</option>
+          <option value="non">non</option>
+        </select>
+      </div>
+
+      <div>
+        <label for="categorieJuridique">Categorie juridique</label>
+        <select
+          [(ngModel)]="categorieJuridique"
+          id="categorieJuridique"
+          name="categorieJuridique"
+        >
+          <option value="EI">EI</option>
+        </select>
+      </div>
+
+      <div *ngIf="categorieJuridique === 'EI'">
+        <label for="autoEntrepreneur">autoEntrepreneur</label>
+        <select
+          [(ngModel)]="autoEntrepreneur"
+          id="autoEntrepreneur"
+          name="autoEntrepreneur"
+        >
+          <option value="oui">oui</option>
+          <option value="non">non</option>
+        </select>
+      </div>
+
+      <div>
+        <label for="versementLiberatoire">versementLiberatoire</label>
+        <select
+          [(ngModel)]="versementLiberatoire"
+          id="versementLiberatoire"
+          name="versementLiberatoire"
+        >
+          <option value="oui">oui</option>
+          <option value="non">non</option>
+        </select>
+      </div>
+
+      <div>
+        <label for="methodeCalculImpot">methodeCalculImpot</label>
+        <select
+          [(ngModel)]="methodeCalculImpot"
+          id="methodeCalculImpot"
+          name="methodeCalculImpot"
+        >
+          <option value="taux neutre">taux neutre</option>
+        </select>
+      </div>
+    </div>
+
     <button type="submit">Simuler</button>
   </form>
 
-  <!-- Résultat de la simulation -->
-  <div *ngIf="result">
+  <div *ngIf="result !== null">
     <h2>Résultats :</h2>
-    <pre>{{ result | json }}</pre>
+    <pre>Vous allez payer {{ result | json }} € d'impot cette année</pre>
   </div>
 </div>
