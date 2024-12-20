@@ -1,7 +1,8 @@
-const express = require("express");
-const cors = require("cors");
-const dotenv = require("dotenv");
-const axios = require("axios");
+import express from "express";
+import cors from "cors";
+import dotenv from "dotenv";
+import simulatorRoute from "./routes/simulatorRoute.js";
+import covidRoute from "./routes/covidRoute.js";
 
 dotenv.config();
 
@@ -14,7 +15,8 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.use(express.json());
 
-app.use("/api/simulator", require("./routes/simulatorRoute"));
+app.use("/api/simulator", simulatorRoute);
+app.use("/api/covid", covidRoute);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

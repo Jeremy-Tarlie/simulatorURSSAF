@@ -1,7 +1,8 @@
-const express = require('express');
-const simulatorController = require('../controllers/simulatorController');
+import express from 'express';
+import { simulator } from '../controllers/simulatorController.js';
+
 const router = express.Router();
 
+router.post('/', simulator);
 
-router.post('/', simulatorController.simulator);
-
+export default router;

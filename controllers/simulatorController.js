@@ -1,6 +1,6 @@
 import axios from "axios";
 
-async function simulator(req, res) {
+export async function simulator(req, res) {
   const simulationParams = req.body;
 
   try {
@@ -15,5 +15,3 @@ async function simulator(req, res) {
     res.status(err.response?.status || 500).send(err.message);
   }
 }
-
-module.exports = simulator;
