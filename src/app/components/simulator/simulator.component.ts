@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { EntrepriseService } from '../../services/entreprise.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import jsPDF from 'jspdf';
 
 @Component({
   selector: 'app-simulator',
@@ -76,6 +77,29 @@ export class SimulatorComponent {
     } catch (err: any) {
       console.error('Erreur lors de la simulation :', err.message);
     }
+  }
+
+  async downloadPdf() {
+    const doc = new jsPDF();
+
+    doc.setFontSize(18).text('Simulation de votre impot', 10, 10);
+    doc
+      .setFontSize(12)
+      .text(
+        `Vous avez un salaire annuel de ${
+          this.salaireBrut
+            ? this.salaireUnite.trim() === '€/mois' || this.salaireUnite.trim() === '/mois'
+              ? this.salaireBrut * 12
+              : this.salaireBrut
+            : this.ca
+        }€`,
+        10,
+        20
+      );
+
+    doc.text(`Les impots que vous allez payer est de ${this.result}€`, 10, 50);
+
+    doc.save('simulator.pdf');
   }
 }
 

@@ -116,5 +116,6 @@
   <div *ngIf="result !== null">
     <h2>Résultats :</h2>
     <pre>Vous allez payer {{ result | json }} € d'impot cette année</pre>
+    <button (click)="downloadPdf()">Download en PDF</button>
   </div>
 </div>

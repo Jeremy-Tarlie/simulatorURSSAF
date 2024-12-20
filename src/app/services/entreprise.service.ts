@@ -16,4 +16,16 @@ export class EntrepriseService {
       throw new Error(error.response?.data || 'Erreur serveur');
     }
   }
+
+  async downloadPdf(simulatorData: any): Promise<any> {
+    try {
+      const response = await axios.post(`${this.backendUrl}/pdf`, simulatorData, {
+        responseType: 'blob',
+      });
+      return response.data;
+    } catch (error: any) {
+      console.error('Erreur API backend :', error.message);
+      throw new Error(error.response?.data || 'Erreur serveur');
+    }
+  }
 }
